@@ -1,0 +1,46 @@
+/* app css stylesheet */
+body{
+  padding: 10px;
+}
+
+.words-list {
+  overflow-y: auto;
+  border: 0 transparent;
+  margin-top: 2px;
+}
+
+.input-box{
+  width: 100%;
+  padding: 5px 30px 5px 5px;
+  height: 100px;
+  display: block;
+}
+
+.input-div{
+  display: inline-block;
+  position: relative;
+  width: 100%;
+}
+
+.button{
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  cursor: copy;
+}
+
+.copiedTitle{
+  position: absolute;
+  bottom: 5px;
+  right: 35px;
+  color: lightgray;
+}
+
+.result-box{
+  background: lightgrey;
+  height: 100px;
+  padding: 5px;
+  width: 100%;
+}
+
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.50); }

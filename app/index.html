@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sentence Builder App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="app.css">
+    <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/rx-lite/rx.lite.js"></script>
+</head>
+<body ng-controller="sbController as ctrl">
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <h2>Sentence Builder</h2>
+    </nav>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-12" style="margin-bottom: 10px;">
+            <p>Якщо Ви володієте англійскою мовою, ала не дуже впевнено, цей сервіс допоможе писати речення на англійській.</p>
+            <p>Просто вводіть його в бокс, що зліва. Підказки з напису англійских слів будуть з'являтися в списках знизу
+            (якщо треба, то виберіть та натисніть <i>spaceBar</i>). Забули якесь слово? Наберіть його рідною мовою,
+            варіанти перекладів також з'являться знизу.</p>
+            <p>Переклад цілого речення з'являється в правому боксі. <br/><u>Припускаємо</u>: якщо переклад виглядає добре, то й оригінальне
+            речення на англійскій мові також побудовано коректно.</p>
+            <div class="text-right" style="padding-bottom: 5px;">
+                <span class="align-middle">Спробуйте</span> <i class="material-icons align-middle">sentiment_satisfied_alt</i>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-lg-6">
+            <div class="input-div">
+                <textarea id="input" ng-model="ctrl.input" ng-change="change()" class="input-box" rows="3"
+                          ng-copy="copied=true" ng-init="copied=false"></textarea>
+                <i class="material-icons md-dark md-inactive md-18 button" ng-click="copyResult()">file_copy</i>
+                <div class="copiedTitle" ng-show="copied">copied</div>
+            </div>
+            <p>
+                <select id="results" size="10" class="words-list">
+                    <option ng-repeat="word in resultsList" value="{{word}}">{{word}}</option>
+                </select>
+            </p>
+        </div>
+        <div class="col-sm-12 col-lg-6" style="padding-left: 0;">
+            <div class="result-box">{{translatedSentence}}</div>
+        </div>
+    </div>
+</div>
+
+<!-- In production use:
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-route/angular-route.js"></script>
+<script src="app.js"></script>
+<script src="core/version/version.js"></script>
+<script src="core/version/version-directive.js"></script>
+<script src="core/version/interpolate-filter.js"></script>
+<script src="services/translate-module.js"></script>
+<script src="services/translate-service.js"></script>
+<script src="services/ngClipboard.js"></script>
+</body>
+</html>
