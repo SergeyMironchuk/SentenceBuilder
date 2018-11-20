@@ -33,6 +33,8 @@ function ($scope, translate, ngClipboard, apiKey, language) {
         $results.hide();
         $scope.translatedSentence = "";
         $scope.copied = false;
+        $scope.resultsList = [];
+        $input.focus();
     }
 
     $scope.change = function(){
