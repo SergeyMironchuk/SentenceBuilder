@@ -4,15 +4,16 @@ body{
 }
 
 .words-list {
-  overflow-y: auto;
   border: 0 transparent;
-  margin-top: 2px;
 }
+
+.bloc { display:inline-block; vertical-align:top; overflow:hidden; border:solid transparent 1px; }
+.bloc select { padding:10px; margin:-5px -20px -5px -5px; }
 
 .input-box{
   width: 100%;
   padding: 5px 30px 5px 5px;
-  height: 100px;
+  height: 200px;
   display: block;
 }
 
@@ -22,9 +23,16 @@ body{
   width: 100%;
 }
 
-.button{
+.copyButton{
   position: absolute;
   bottom: 5px;
+  right: 5px;
+  cursor: copy;
+}
+
+.clearButton{
+  position: absolute;
+  bottom: 170px;
   right: 5px;
   cursor: copy;
 }
@@ -38,7 +46,7 @@ body{
 
 .result-box{
   background: lightgrey;
-  height: 100px;
+  height: 200px;
   padding: 5px;
   width: 100%;
 }

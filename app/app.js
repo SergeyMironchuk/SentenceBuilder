@@ -1,42 +1,64 @@
-angular.module('myApp', ['translate', 'ngClipboard']).
-controller("sbController", ["$scope", "translate", "ngClipboard", function ($scope, translate, ngClipboard) {
+var myApp = angular.module('myApp', ['translate', 'ngClipboard']);
+myApp.controller("sbController", ["$scope", "translate", "ngClipboard", "apiKey", "language",
+function ($scope, translate, ngClipboard, apiKey, language) {
+    $('[data-toggle="tooltip"]').tooltip()
     var $input = $("#input"),
         $results = angular.element(document.querySelector("#results"));
+
+    $("#uaTitle").show();
+    $("#ruTitle").show();
+    $("#mainPanel").show();
     $input.focus();
-    this.input = "";
+
+    $scope.inputValue = "";
     $scope.resultsList = [];
     $scope.translatedSentence = "";
     $scope.copied = false;
 
+    $scope.lang = language;
+    $scope.changeLanguage = function(){
+        language = $scope.lang;
+        prepareTranslation($scope.inputValue);
+        $input.focus();
+    }
+
     $scope.copyResult = function(){
-        ngClipboard.toClipboard($input.val());
+        ngClipboard.toClipboard($scope.inputValue);
         $scope.copied = true;
+        $input.focus();
+    }
+
+    $scope.clearInput = function(){
+        $scope.inputValue = "";
+        $results.hide();
+        $scope.translatedSentence = "";
+        $scope.copied = false;
     }
 
     $scope.change = function(){
         $scope.copied = false;
-        if (!$input.val()) {
+        if (!$scope.inputValue) {
             $results.hide();
             $scope.translatedSentence = "";
         }
         else {
             var word = getCurrentWord($input);
             prepareWordsList(word);
-            prepareTranslation($input.val());
+            prepareTranslation($scope.inputValue);
         }
     }
 
     function prepareWordsList(word){
-        var listPromise = translate.getSuggestions(word);
+        var listPromise = translate.getSuggestions(word, language, apiKey);
+        $results.show();
         if (listPromise) {
-            $results.show();
-            listPromise.then(result => $scope.resultsList = result.data)
+            listPromise.then(result => $scope.resultsList = result.data ? result.data : result.map(item => item.word))
                .catch(error => $scope.resultsList = [error]);
         }
     }
 
     function prepareTranslation(sentence){
-        translate.translateSentence(sentence)
+        translate.translateSentence(sentence, language, apiKey)
             .then(result => $scope.translatedSentence = result.data.join(';'))
             .catch(error => $scope.translatedSentence = error);
     }
@@ -67,6 +89,9 @@ controller("sbController", ["$scope", "translate", "ngClipboard", function ($sco
             $results.focus();
             $("#results :first-child").attr('selected', true);
         }
+        else if(e.which === 32){
+            $results.hide();
+        }
     });
     $input.on("keyup", function(e){
         // LeftArrow, RightArrow
@@ -81,23 +106,32 @@ controller("sbController", ["$scope", "translate", "ngClipboard", function ($sco
     });
 
     $results.on('click', function(){
-        replaceWordInInput($input, $("#results option:selected").text());
-        prepareTranslation($input.val());
+        let inputValue = $scope.inputValue;
+        $scope.inputValue = replaceWord(inputValue, $("#results option:selected").text(), $scope.textPosition);
+        prepareTranslation($scope.inputValue);
         $results.hide();
+        $input.focus();
     });
-    $results.on('keydown', function(e){
+    $results.on('keypress', function(e){
         if(e.which === 32) {
-            replaceWordInInput($input, $("#results option:selected").text());
-            prepareTranslation($input.val());
+            let inputValue = $scope.inputValue;
+            $scope.inputValue = replaceWord(inputValue, $("#results option:selected").text(), $scope.textPosition);
+            prepareTranslation($scope.inputValue);
             $results.hide();
+            $input.focus();
+        }
+    });
+    $results.on('keyup', function(e){
+        if (e.which == 27) {
+            $results.hide();
+            $input.focus();
         }
     });
 
-    function replaceWordInInput(inputElement, newWord) {
+    function replaceWord(inputText, newWord, position) {
         newWord = newWord.split('|').shift();
-        let position = $scope.textPosition;
-        let leftPart = inputElement.val().substring(0, position);
-        let rightPart = inputElement.val().substring(position);
+        let leftPart = inputText.substring(0, position);
+        let rightPart = inputText.substring(position);
         let leftPartArray = leftPart.split(' ');
         let rightPartArray = rightPart.split(' ');
         leftPartArray.pop()
@@ -108,7 +142,6 @@ controller("sbController", ["$scope", "translate", "ngClipboard", function ($sco
             + ' '
             + rightPartArray.join(' ');
 
-        inputElement.val(result.trim());
-        inputElement.focus();
+        return result.trim();
     };
 }]);
