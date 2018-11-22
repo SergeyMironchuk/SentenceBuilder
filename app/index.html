@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sentence Builder App</title>
+    <title>Sentences Builder App</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
@@ -24,7 +24,7 @@
 <div class="container">
     <nav class="navbar fixed-top navbar-light bg-transparent" style="padding-top: 0;">
         <div class="container border-bottom bg-light">
-            <h2>Sentence Builder</h2>
+            <h2>Sentences Builder</h2>
             <select ng-model="lang" ng-change="changeLanguage()" class="custom-select" style="width: 120px">
                 <option value="uk">Ukrainian</option>
                 <option value="ru">Russian</option>
@@ -32,7 +32,29 @@
         </div>
     </nav>
     <div class="row" id="description" style="margin-top: 70px; height: 250px;">
-        <div id="uaTitle" class="col-12" style="margin-bottom: 10px; display: none;" ng-show="lang=='uk'">
+        <div id="enTitle" class="col-12" style="margin-bottom: 10px;">
+            <p>
+                If you know English but not very well, this service help you to build English sentences.
+            </p>
+            <p>
+                Just enter English text in left input box, and see on translating to native language in right box.
+            </p>
+            <p>
+                Suggestions of English words will be appear below (select if need using <i>arrow Key</i> and press <i>space
+                Bar</i>).
+            </p>
+            <p>
+                Forgot some word? Type it on native language, variants of translating will be appear below, and you can select one of them.
+            </p>
+            <p>
+                <u>Guess</u>: if translating looks good then original text is also correct.
+            </p>
+            <div class="text-right" style="padding-bottom: 5px;">
+                <span class="align-middle">Try</span> <i class="material-icons align-middle">sentiment_satisfied_alt</i>
+            </div>
+
+        </div>
+        <div id="uaTitle" class="col-12" style="margin-bottom: 10px; display: none;" ng-show="lang=='noneua'">
             <p>
                 Якщо Ви володієте англійскою мовою, ала не дуже впевнено, цей сервіс допоможе Вам написати речення
                 на англійській.
@@ -55,7 +77,7 @@
             </div>
 
         </div>
-        <div id="ruTitle" class="col-12" style="margin-bottom: 10px; display: none;" ng-show="lang=='ru'">
+        <div id="ruTitle" class="col-12" style="margin-bottom: 10px; display: none;" ng-show="lang=='noneru'">
             <p>
                 Если Вы владеете английским языком, но не очень уверенно, этот сервис поможет Вам написать
                 английское предложение.
@@ -109,7 +131,7 @@
             <div id="translated" class="result-box">{{translatedSentence}}</div>
         </div>
     </div>
-    <nav class="navbar fixed-bottom bg-transparent" style="padding-bottom: 0;">
+    <nav class="navbar fixed-bottom bg-transparent" style="padding-bottom: 0; font-size: 0.8em;">
         <div class="container border-top bg-light" style="padding: 8px">
             <a href="https://www.datamuse.com/api/">
                 datamuse API
