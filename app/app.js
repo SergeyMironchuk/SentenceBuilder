@@ -84,7 +84,8 @@ function ($scope, translate, ngClipboard, apiKey, language) {
     $scope.textPosition = 0;
     $input.on("keydown", function(e){
         // DownArrow
-        if (e.which === 40) {
+        if (e.ctrlKey && e.which === 40) {
+            console.log(e.which);
             var target = $input.get()[0];
             $scope.textPosition = target.selectionStart;
             $results.show();
