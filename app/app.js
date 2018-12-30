@@ -69,16 +69,7 @@ function ($scope, translate, ngClipboard, apiKey, language) {
         var target = element.get()[0];
         var position = target.selectionStart;
         var value = target.value;
-        var leftPart = value.substring(0, position);
-        var rightPart = target.value.substring(position);
-        if (leftPart.split('').pop() === ' '){ // word1 |word2
-            return rightPart.split(' ').shift();
-        }
-        if (rightPart.split('').shift() === ' '){ // word1| word2
-            return leftPart.split(' ').pop();
-        }
-        // wo|rd
-        return leftPart.split(' ').pop() + rightPart.split(' ').shift();
+        return getCurrentWordFromSentence(value, position);
    }
 
     $scope.textPosition = 0;
@@ -110,7 +101,7 @@ function ($scope, translate, ngClipboard, apiKey, language) {
 
     $results.on('click', function(){
         let inputValue = $scope.inputValue;
-        $scope.inputValue = replaceWord(inputValue, $("#results option:selected").text(), $scope.textPosition);
+        $scope.inputValue = replaceWordInSentence(inputValue, $("#results option:selected").text(), $scope.textPosition);
         prepareTranslation($scope.inputValue);
         $results.hide();
         $input.focus();
@@ -118,7 +109,7 @@ function ($scope, translate, ngClipboard, apiKey, language) {
     $results.on('keypress', function(e){
         if(e.which === 32) {
             let inputValue = $scope.inputValue;
-            $scope.inputValue = replaceWord(inputValue, $("#results option:selected").text(), $scope.textPosition);
+            $scope.inputValue = replaceWordInSentence(inputValue, $("#results option:selected").text(), $scope.textPosition);
             prepareTranslation($scope.inputValue);
             $results.hide();
             $input.focus();
@@ -130,21 +121,4 @@ function ($scope, translate, ngClipboard, apiKey, language) {
             $input.focus();
         }
     });
-
-    function replaceWord(inputText, newWord, position) {
-        newWord = newWord.split('|').shift();
-        let leftPart = inputText.substring(0, position);
-        let rightPart = inputText.substring(position);
-        let leftPartArray = leftPart.split(' ');
-        let rightPartArray = rightPart.split(' ');
-        leftPartArray.pop()
-        rightPartArray.shift();
-        let result = leftPartArray.join(' ')
-            + ' '
-            + newWord
-            + ' '
-            + rightPartArray.join(' ');
-
-        return result.trim();
-    };
 }]);
