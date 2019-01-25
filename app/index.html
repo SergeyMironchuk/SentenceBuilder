@@ -28,6 +28,7 @@
             <select ng-model="lang" ng-change="changeLanguage()" class="custom-select" style="width: 120px">
                 <option value="uk">Ukrainian</option>
                 <option value="ru">Russian</option>
+                <option value="es">Spanish</option>
             </select>
         </div>
     </nav>
@@ -57,54 +58,6 @@
             </div>
 
         </div>
-        <div id="uaTitle" class="col-12" style="margin-bottom: 10px; display: none;" ng-show="lang=='noneua'">
-            <p>
-                Якщо Ви володієте англійскою мовою, ала не дуже впевнено, цей сервіс допоможе Вам написати речення
-                на англійській.
-            </p>
-            <p>
-                Просто вводіть його в лівий бокс, та дивіться переклад на українську в правому боксі.
-            </p>
-            <p>
-                Підказки з напису англійских слів будуть з'являтися в списках знизу
-                (якщо треба, то виберіть за допомогою <i>arrowKeys</i> і натисніть <i>spaceBar</i>).
-            </p>
-            <p>
-                Забули якесь слово? Наберіть його рідною мовою, варіанти перекладів також з'являться знизу і можна вибрати один с них.
-            </p>
-            <p>
-                <u>Припускаємо</u>: якщо переклад виглядає добре, то й оригінальне речення на англійскій мові також побудовано коректно.
-            </p>
-            <div class="text-right" style="padding-bottom: 5px;">
-                <span class="align-middle">Спробуйте</span> <i class="material-icons align-middle">sentiment_satisfied_alt</i>
-            </div>
-
-        </div>
-        <div id="ruTitle" class="col-12" style="margin-bottom: 10px; display: none;" ng-show="lang=='noneru'">
-            <p>
-                Если Вы владеете английским языком, но не очень уверенно, этот сервис поможет Вам написать
-                английское предложение.
-            </p>
-            <p>
-                Просто вводите его в левый бокс и смотрите перевод на русский в правом боксе.
-            </p>
-            <p>
-                Подсказки по написанию английских слов будут появляться внизу
-                (если нужно, то выберите при помощи <i>arrowKeys</i> и нажмите <i>spaceBar</i>).
-            </p>
-            <p>
-                Забыли какое-то слово? Наберите его на русском,
-                варианты переводов также появляются снизу и можно выбрать один из них.
-            </p>
-            <p>
-                <u>Предположение</u>: если перевод выглядит красиво, то и оригинальное
-                предложение на английском языке тоже построено корректно.
-            </p>
-            <div class="text-right" style="padding-bottom: 5px;">
-                <span class="align-middle">Попробуйте</span> <i class="material-icons align-middle">sentiment_satisfied_alt</i>
-            </div>
-
-        </div>
     </div>
     <div class="row" id="mainPanel" style="display: none;">
         <div class="col-sm-12 col-lg-6">
@@ -131,6 +84,7 @@
         <div class="col-sm-12 col-lg-6" style="padding-left: 0;">
             <label for="translated" ng-show="lang=='uk'" style="color: lightgray;">ukrainian</label>
             <label for="translated" ng-show="lang=='ru'" style="color: lightgray;">russian</label>
+            <label for="translated" ng-show="lang=='es'" style="color: lightgray;">spanish</label>
             <div id="translated" class="result-box">{{translatedSentence}}</div>
         </div>
     </div>

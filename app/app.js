@@ -5,8 +5,6 @@ function ($scope, translate, ngClipboard, apiKey, language) {
     var $input = $("#input"),
         $results = angular.element(document.querySelector("#results"));
 
-    $("#uaTitle").show();
-    $("#ruTitle").show();
     $("#mainPanel").show();
     $input.focus();
 
