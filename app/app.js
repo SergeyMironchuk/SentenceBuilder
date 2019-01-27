@@ -1,3 +1,5 @@
+//import {getCurrentWordFromSentence, replaceWordInSentence} from "./services/wordsFunctions";
+
 var myApp = angular.module('myApp', ['translate', 'ngClipboard']);
 myApp.controller("sbController", ["$scope", "translate", "ngClipboard", "apiKey", "language",
 function ($scope, translate, ngClipboard, apiKey, language) {

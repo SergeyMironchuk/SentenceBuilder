@@ -9,10 +9,11 @@
     "angular": "^1.7.5",
     "angular-loader": "^1.7.5",
     "angular-route": "^1.7.5",
-    "html5-boilerplate": "0.0.1",
     "bootstrap": "4.1.3",
-    "rx-lite": "4.0.8",
-    "jquery": "^3.3.1"
+    "html5-boilerplate": "0.0.1",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3",
+    "rx-lite": "4.0.8"
   },
   "devDependencies": {
     "angular-mocks": "^1.7.5",
@@ -23,14 +24,18 @@
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.1.0",
     "karma-jasmine": "^1.1.2",
-    "protractor": "^5.4.1"
+    "protractor": "^5.4.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
   },
   "scripts": {
+    "build": "webpack -p",
+    "watch": "webpack --watch",
     "postinstall": "npm run copy-libs",
     "update-deps": "npm update",
     "postupdate-deps": "npm run copy-libs",
     "copy-libs": "cpx \"node_modules/{angular,angular-*,html5-boilerplate/dist,bootstrap/dist,rx-lite,jquery/dist}/**/*.{css,js,map}\" app/lib -C",
-    "prestart": "npm install",
+    "copy-dist": "cpx \"app/{index.html,main.js,app.css,lib/{html5-boilerplate/dist/{js/vendor/modernizr-2.8.3.min.js,css/normalize.css,css/main.css},bootstrap/dist/css/bootstrap.min.css}}\" dist/ -C",
     "start": "http-server -a localhost -p 8000 -c-1 ./app",
     "pretest": "npm install",
     "test": "karma start karma.conf.js",

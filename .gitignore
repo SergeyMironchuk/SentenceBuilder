@@ -5,3 +5,4 @@ app/lib/
 tmp
 .DS_Store
 .idea
+/app/main.js
